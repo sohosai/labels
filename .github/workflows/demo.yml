@@ -2,7 +2,7 @@ name: Apply Demo
 on: [workflow_dispatch]
 
 jobs:
-  deploy:
+  apply:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
