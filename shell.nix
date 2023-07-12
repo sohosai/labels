@@ -1,8 +1,10 @@
 { pkgs ? import ./nix/pkgs.nix {
-  inherit system;
-}, system ? builtins.currentSystem }:
+    inherit system;
+  }
+, system ? builtins.currentSystem
+}:
 let
-  github-label-setup = import ./nix/github-label-setup.nix {
+  github-label-sync = import ./nix/github-label-sync.nix {
     inherit pkgs;
     inherit system;
     nodejs = pkgs.nodejs;
@@ -10,7 +12,10 @@ let
 in
 pkgs.mkShell {
   nativeBuildInputs = [
-    github-label-setup."@azu/github-label-setup"
+    github-label-sync."github-label-sync"
     pkgs.node2nix
+    pkgs.jq
+    pkgs.shellcheck
+    pkgs.nixpkgs-fmt
   ];
 }
