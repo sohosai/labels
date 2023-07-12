@@ -1,0 +1,3 @@
+nix/node-env.nix linguist-generated
+nix/node-packages.nix linguist-generated
+nix/github-label-setup.nix linguist-generated
