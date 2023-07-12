@@ -3,13 +3,13 @@
 set -eu
 
 if [ $# -ne 2 ]; then
-  echo "Usage: $0 GITHUB_SECRET APPLY_ENV"
+  echo "Usage: $0 $GITHUB_TOKEN APPLY_ENV"
   exit 1
 fi
 
 shopt -s lastpipe
 
-GITHUB_SECRET=$1
+GITHUB_TOKEN=$1
 APPLY_ENV=$2 # "dev" or "dry-run" or "prod"
 
 organization="sohosai"
@@ -49,8 +49,8 @@ for repository in $(echo "$repositoriesJson" | jq -r keys[]); do
   tmpfile=$(mktemp)
   jq -s add "${targetJsonFiles[@]}" > "$tmpfile"
   if [ "$APPLY_ENV" = "dry-run" ]; then
-    github-label-sync --access-token "$GITHUB_SECRET" --labels "$tmpfile" "$organization"/"$repository" --dry-run
+    github-label-sync --access-token "$GITHUB_TOKEN" --labels "$tmpfile" "$organization"/"$repository" --dry-run
   else
-    github-label-sync --access-token "$GITHUB_SECRET" --labels "$tmpfile" "$organization"/"$repository"
+    github-label-sync --access-token "$GITHUB_TOKEN" --labels "$tmpfile" "$organization"/"$repository"
   fi
 done

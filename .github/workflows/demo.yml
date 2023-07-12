@@ -9,6 +9,6 @@ jobs:
       - uses: cachix/install-nix-action@v20
       - name: Apply
         run: |
-          nix-shell --command "bash src/main.sh $GITHUB_SECRET dev"
+          nix-shell --command "bash src/main.sh $GITHUB_TOKEN dev"
         env:
-          GITHUB_SECRET: ${{ secrets.GITHUB_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
