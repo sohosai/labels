@@ -1,10 +1,12 @@
 {
     "info-mail": [
         "mail",
-        "mail-honki"
+        "mail-honki",
+        "mail-jsys"
     ],
     "project49th-mail": [
         "mail",
-        "mail-honki"
+        "mail-honki",
+        "mail-jsys"
     ]
 }
