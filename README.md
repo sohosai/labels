@@ -1,4 +1,7 @@
 # labels
+[![Apply](https://github.com/sohosai/labels/actions/workflows/main.yml/badge.svg)](https://github.com/sohosai/labels/actions/workflows/main.yml)
+[![CI](https://github.com/sohosai/labels/actions/workflows/ci.yml/badge.svg)](https://github.com/sohosai/labels/actions/workflows/ci.yml)
+
 labelsは[sohosai](https://github.com/sohosai)が持つリポジトリのラベルを管理するためのリポジトリです。
 deployワークフローによってリポジトリのラベルを設定します。
 
