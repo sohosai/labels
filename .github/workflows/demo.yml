@@ -1,0 +1,14 @@
+name: Apply Demo
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v20
+      - name: Apply
+        run: |
+          nix-shell --command "bash src/main.sh $GITHUB_SECRET dev"
+        env:
+          GITHUB_SECRET: ${{ secrets.GITHUB_SECRET }}
