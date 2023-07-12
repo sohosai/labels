@@ -22,3 +22,12 @@ github-label-setupを更新するには、nix-shell内で以下のコマンド�
 ```
 $ node2nix -i node-packages.json -o nix/node-packages.nix -e nix/node-env.nix -c nix/github-label-sync.nix
 ```
+
+### PATの利用
+sohosaiのプライベートリポジトリにアクセスするために、Personal Access Tokenを発行して`src/main.sh`に渡す必要があります。
+
+```
+$ SOHOSAI_LABELS_TOKEN=<personal access token>
+$ APPLY_ENV=<"dev"|"dry-run"|"prod">
+$ bash src/main.sh $SOHOSAI_LABELS_TOKEN $APPLY_ENV
+```

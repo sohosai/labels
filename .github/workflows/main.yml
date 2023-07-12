@@ -14,4 +14,4 @@ jobs:
         run: |
           nix-shell --command "bash src/main.sh $GITHUB_TOKEN prod"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
