@@ -46,10 +46,10 @@ for repository in $(echo "$repositoriesJson" | jq -r keys[]); do
     fi
     targetJsonFiles+=("labels/$label.json")
   done
-  tmpfile=$(mktemp)
+  tmpfile=$(mktemp --suffix=.json)
   jq -s add "${targetJsonFiles[@]}" > "$tmpfile"
   if [ "$APPLY_ENV" = "dry-run" ]; then
-    github-label-sync --access-token "$GITHUB_TOKEN" --labels "$tmpfile" "$organization"/"$repository" --dry-run
+    github-label-sync --access-token "$GITHUB_TOKEN" --labels "$tmpfile" --dry-run "$organization"/"$repository"
   else
     github-label-sync --access-token "$GITHUB_TOKEN" --labels "$tmpfile" "$organization"/"$repository"
   fi
