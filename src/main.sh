@@ -16,7 +16,7 @@ organization="sohosai"
 
 find . -maxdepth 2 -mindepth 2 \( -wholename './labels/*.dhall' -or -wholename './assets/*.dhall' \) -print0 | while IFS= read -r -d '' dhall; do
   json=$(dirname "$dhall")/$(basename "$dhall" .dhall).json
-  cat "$dhall" | dhall-to-json --pretty > "$json"
+  < "$dhall" dhall-to-json --pretty > "$json"
 done
 
 definedLabels=()
