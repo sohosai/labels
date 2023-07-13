@@ -1,1 +1,4 @@
 .envrc
+
+assets/*.json
+labels/*.json
