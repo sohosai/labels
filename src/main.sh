@@ -13,8 +13,14 @@ GITHUB_TOKEN=$1
 APPLY_ENV=$2 # "dev" or "dry-run" or "prod"
 
 organization="sohosai"
+
+find . -maxdepth 2 -mindepth 2 \( -wholename './labels/*.dhall' -or -wholename './assets/*.dhall' \) -print0 | while IFS= read -r -d '' dhall; do
+  json=$(dirname "$dhall")/$(basename "$dhall" .dhall).json
+  cat "$dhall" | dhall-to-json --pretty > "$json"
+done
+
 definedLabels=()
-find ./labels -maxdepth 1 -mindepth 1 -print0 | xargs -0 -I@ basename @ .json | while read -r label; do
+find ./labels -maxdepth 1 -mindepth 1 -name '*.json' -print0 | xargs -0 -I@ basename @ .json | while read -r label; do
   definedLabels+=("$label")
 done
 
@@ -54,3 +60,6 @@ for repository in $(echo "$repositoriesJson" | jq -r keys[]); do
     github-label-sync --access-token "$GITHUB_TOKEN" --labels "$tmpfile" "$organization"/"$repository"
   fi
 done
+
+rm -rf assets/*.json
+rm -rf labels/*.json
