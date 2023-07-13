@@ -17,5 +17,7 @@ pkgs.mkShell {
     pkgs.jq
     pkgs.shellcheck
     pkgs.nixpkgs-fmt
+    pkgs.dhall
+    pkgs.dhall-json
   ];
 }
