@@ -2,15 +2,18 @@ let Repository = ./models/repository.dhall
 
 let DefinedLabelKind = (./models/label.dhall).DefinedLabelKind
 
-in    { info-mail =
-        [ DefinedLabelKind.mail
-        , DefinedLabelKind.mail-honki
-        , DefinedLabelKind.mail-jsys
-        ]
-      , project49th-mail =
-        [ DefinedLabelKind.mail
-        , DefinedLabelKind.mail-honki
-        , DefinedLabelKind.mail-jsys
-        ]
-      }
-    : Repository
+let mailLabels =
+      [ DefinedLabelKind.mail-dan
+      , DefinedLabelKind.mail-honki
+      , DefinedLabelKind.mail-jsys
+      , DefinedLabelKind.mail-kosen
+      , DefinedLabelKind.mail-sg
+      , DefinedLabelKind.mail-sok
+      , DefinedLabelKind.mail-som
+      , DefinedLabelKind.mail-ss
+      , DefinedLabelKind.mail-stage
+      , DefinedLabelKind.mail-zai
+      , DefinedLabelKind.mail
+      ]
+
+in  { info-mail = mailLabels, project49th-mail = mailLabels } : Repository
