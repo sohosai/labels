@@ -5,7 +5,7 @@ jobs:
   shellcheck:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-12.0]
+        os: [ubuntu-22.04, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +15,7 @@ jobs:
   sync-dry-run:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-12.0]
+        os: [ubuntu-22.04, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
   nixpkgs-fmt:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-12.0]
+        os: [ubuntu-22.04, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
   dhall-lint:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-12.0]
+        os: [ubuntu-22.04, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -53,7 +53,7 @@ jobs:
   dhall-format:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-12.0]
+        os: [ubuntu-22.04, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -66,7 +66,7 @@ jobs:
   actionlint:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-12.0]
+        os: [ubuntu-22.04, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
