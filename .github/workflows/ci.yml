@@ -5,7 +5,7 @@ jobs:
   shellcheck:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-22.04, macos-12.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +15,7 @@ jobs:
   sync-dry-run:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-22.04, macos-12.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -27,33 +27,42 @@ jobs:
   nixpkgs-fmt:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-22.04, macos-12.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA nixpkgs-fmt
-      - run: nixpkgs-fmt --check "$(find . -name '*.nix' ! -name 'github-label-sync.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix')"
+      - run: |
+          find . -name '*.nix' ! -name 'github-label-sync.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix' -print0 | while IFS= read -r -d '' file; do
+            nixpkgs-fmt --check "$file"
+          done
   dhall-lint:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-22.04, macos-12.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
-      - run: dhall lint --check "$(find . -name '*.dhall')"
+      - run: |
+          find . -name '*.dhall' -print0 | while IFS= read -r -d '' file; do
+            dhall lint --check "$file"
+          done
   dhall-format:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-22.04, macos-12.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
-      - run: dhall format --check "$(find . -name '*.dhall')"
+      - run: |
+          find . -name '*.dhall' -print0 | while IFS= read -r -d '' file; do
+            dhall format --check "$file"
+          done
   actionlint:
     strategy:
       matrix:
