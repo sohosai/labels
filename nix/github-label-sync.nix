@@ -10,4 +10,4 @@ let
     };
   };
 in
-  newNodePackages.github-label-sync
+newNodePackages.github-label-sync

@@ -34,7 +34,7 @@ jobs:
       - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA nixpkgs-fmt
       - run: |
-          find . -name '*.nix' ! -name 'github-label-sync.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix' -print0 | while IFS= read -r -d '' file; do
+          find . -name '*.nix' ! -name 'node2nix-composition.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix' -print0 | while IFS= read -r -d '' file; do
             nixpkgs-fmt --check "$file"
           done
   dhall-lint:
