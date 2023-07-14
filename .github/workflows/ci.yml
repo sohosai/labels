@@ -3,14 +3,20 @@ on: [push, pull_request]
 
 jobs:
   shellcheck:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA shellcheck
       - run: shellcheck -x -s bash ./src/main.sh
   sync-dry-run:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
@@ -19,28 +25,40 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
   nixpkgs-fmt:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA nixpkgs-fmt
       - run: nixpkgs-fmt --check "$(find . -name '*.nix' ! -name 'github-label-sync.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix')"
   dhall-lint:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
       - run: dhall lint --check "$(find . -name '*.dhall')"
   dhall-format:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
       - run: dhall format --check "$(find . -name '*.dhall')"
   actionlint:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
