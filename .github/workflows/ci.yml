@@ -39,3 +39,10 @@ jobs:
       - uses: cachix/install-nix-action@v20
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
       - run: dhall format --check $(find . -name '*.dhall')
+  actionlint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v20
+      - run: nix-env -f ./nix/pkgs.nix -iA actionlint
+      - run: actionlint

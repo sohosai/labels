@@ -19,5 +19,6 @@ pkgs.mkShell {
     pkgs.nixpkgs-fmt
     pkgs.dhall
     pkgs.dhall-json
+    pkgs.actionlint
   ];
 }
