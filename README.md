@@ -23,7 +23,7 @@ $ nix-shell
 github-label-setupを更新するには、nix-shell内で以下のコマンドを実行し、各Nixファイルの変更をコミットしてください。
 
 ```
-$ node2nix -i node-packages.json -o nix/node-packages.nix -e nix/node-env.nix -c nix/github-label-sync.nix
+$ node2nix -i node-packages.json -o nix/node-packages.nix -e nix/node-env.nix -c nix/node2nix-composition.nix
 ```
 
 ### PATの利用
