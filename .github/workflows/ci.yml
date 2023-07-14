@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA shellcheck
       - run: shellcheck -x -s bash ./src/main.sh
   sync-dry-run:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: |
           nix-shell --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
         env: 
@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA nixpkgs-fmt
       - run: |
           find . -name '*.nix' ! -name 'github-label-sync.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix' -print0 | while IFS= read -r -d '' file; do
@@ -44,7 +44,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
       - run: |
           find . -name '*.dhall' -print0 | while IFS= read -r -d '' file; do
@@ -57,7 +57,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
       - run: |
           find . -name '*.dhall' -print0 | while IFS= read -r -d '' file; do
@@ -70,6 +70,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA actionlint
       - run: actionlint
