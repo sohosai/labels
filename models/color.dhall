@@ -1,21 +1,21 @@
-let Color = <
-  Emergency |
-  Common |
-  Stage |
-  TsukubaCity-Sohosai |
-  Dan |
-  GichoDan |
-  Kosen |
-  Zai |
-  Sg |
-  Jsys |
-  Ss |
-  All |
-  Sok |
-  Som |
-  ThatDay |
-  Honki
->
+let Color =
+      < Emergency
+      | Common
+      | Stage
+      | TsukubaCity-Sohosai
+      | Dan
+      | GichoDan
+      | Kosen
+      | Zai
+      | Sg
+      | Jsys
+      | Ss
+      | All
+      | Sok
+      | Som
+      | ThatDay
+      | Honki
+      >
 
 let colorToText =
       \(c : Color) ->

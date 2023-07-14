@@ -2,21 +2,18 @@ let Repository = ./models/repository.dhall
 
 let DefinedLabelKind = (./models/label.dhall).DefinedLabelKind
 
-let mailLabels = [
-  DefinedLabelKind.mail-dan,
-  DefinedLabelKind.mail-honki,
-  DefinedLabelKind.mail-jsys,
-  DefinedLabelKind.mail-kosen,
-  DefinedLabelKind.mail-sg,
-  DefinedLabelKind.mail-sok,
-  DefinedLabelKind.mail-som,
-  DefinedLabelKind.mail-ss,
-  DefinedLabelKind.mail-stage,
-  DefinedLabelKind.mail-zai,
-  DefinedLabelKind.mail,
-]
+let mailLabels =
+      [ DefinedLabelKind.mail-dan
+      , DefinedLabelKind.mail-honki
+      , DefinedLabelKind.mail-jsys
+      , DefinedLabelKind.mail-kosen
+      , DefinedLabelKind.mail-sg
+      , DefinedLabelKind.mail-sok
+      , DefinedLabelKind.mail-som
+      , DefinedLabelKind.mail-ss
+      , DefinedLabelKind.mail-stage
+      , DefinedLabelKind.mail-zai
+      , DefinedLabelKind.mail
+      ]
 
-in    { info-mail = mailLabels
-      , project49th-mail = mailLabels
-      }
-    : Repository
+in  { info-mail = mailLabels, project49th-mail = mailLabels } : Repository

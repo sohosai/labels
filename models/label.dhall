@@ -18,36 +18,35 @@ let convertLabels =
       \(labels : List Label) ->
         List/map Label ConvertedLabel convertLabel labels
 
-let DefinedLabelKind = <
-      mail-dan |
-      mail-honki |
-      mail-jsys |
-      mail-kosen |
-      mail-sg |
-      mail-sok |
-      mail-som |
-      mail-ss |
-      mail-stage |
-      mail-zai |
-      mail
->
+let DefinedLabelKind =
+      < mail-dan
+      | mail-honki
+      | mail-jsys
+      | mail-kosen
+      | mail-sg
+      | mail-sok
+      | mail-som
+      | mail-ss
+      | mail-stage
+      | mail-zai
+      | mail
+      >
 
 let definedLabelKindToText =
       \(label : DefinedLabelKind) ->
         merge
-          {
-            mail-dan = "mail-dan",
-            mail-honki = "mail-honki",
-            mail-jsys = "mail-jsys",
-            mail-kosen = "mail-kosen",
-            mail-sg = "mail-sg",
-            mail-sok = "mail-sok",
-            mail-som = "mail-som",
-            mail-ss = "mail-ss",
-            mail-stage = "mail-stage",
-            mail-zai = "mail-zai",
-            mail = "mail",
-      }
+          { mail-dan = "mail-dan"
+          , mail-honki = "mail-honki"
+          , mail-jsys = "mail-jsys"
+          , mail-kosen = "mail-kosen"
+          , mail-sg = "mail-sg"
+          , mail-sok = "mail-sok"
+          , mail-som = "mail-som"
+          , mail-ss = "mail-ss"
+          , mail-stage = "mail-stage"
+          , mail-zai = "mail-zai"
+          , mail = "mail"
+          }
           label
 
 in  { Type = Label, convertLabels, DefinedLabelKind, definedLabelKindToText }
