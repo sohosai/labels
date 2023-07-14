@@ -12,6 +12,7 @@ let
 in
 pkgs.mkShell {
   nativeBuildInputs = [
+    pkgs.bash
     github-label-sync."github-label-sync"
     pkgs.node2nix
     pkgs.jq
