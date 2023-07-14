@@ -12,6 +12,6 @@ jobs:
       - uses: cachix/install-nix-action@v22
       - name: Apply
         run: |
-          nix-shell --command "bash src/main.sh $GITHUB_TOKEN prod"
+          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN prod"
         env:
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}

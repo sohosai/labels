@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
       - run: |
-          nix-shell --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
+          nix-shell --pure --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
         env: 
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
   nixpkgs-fmt:
