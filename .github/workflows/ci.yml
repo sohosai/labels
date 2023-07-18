@@ -3,39 +3,83 @@ on: [push, pull_request]
 
 jobs:
   shellcheck:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-12]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA shellcheck
       - run: shellcheck -x -s bash ./src/main.sh
-  sync-dry-run:
+  sync-dry-run-macos:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          brew install bash
+          sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+      - uses: cachix/install-nix-action@v22
+      - run: |
+          nix-shell --pure --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
+        shell: /usr/local/bin/bash -l {0}
+        env: 
+          GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
+  sync-dry-run-ubuntu:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: |
-          nix-shell --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
+          nix-shell --pure --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
         env: 
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
   nixpkgs-fmt:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-12]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA nixpkgs-fmt
-      - run: nixpkgs-fmt --check $(find . -name '*.nix' ! -name 'github-label-sync.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix')
+      - run: |
+          find . -name '*.nix' ! -name 'node2nix-composition.nix' ! -name 'node-env.nix' ! -name 'node-packages.nix' -print0 | while IFS= read -r -d '' file; do
+            nixpkgs-fmt --check "$file"
+          done
   dhall-lint:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-12]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
-      - run: dhall lint --check $(find . -name '*.dhall')
+      - run: |
+          find . -name '*.dhall' -print0 | while IFS= read -r -d '' file; do
+            dhall lint --check "$file"
+          done
   dhall-format:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-12]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA dhall
-      - run: dhall format --check $(find . -name '*.dhall')
+      - run: |
+          find . -name '*.dhall' -print0 | while IFS= read -r -d '' file; do
+            dhall format --check "$file"
+          done
+  actionlint:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-12]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v22
+      - run: nix-env -f ./nix/pkgs.nix -iA actionlint
+      - run: actionlint

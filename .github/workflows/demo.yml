@@ -6,9 +6,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
       - name: Apply
         run: |
-          nix-shell --command "bash src/main.sh $GITHUB_TOKEN dev"
+          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN dev"
         env:
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
