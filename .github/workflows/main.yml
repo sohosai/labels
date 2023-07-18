@@ -9,12 +9,14 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - if: runner.os == 'macOS'
+        run: |
+          brew install bash
+          sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+          chsh -s /usr/local/bin/bash
       - uses: cachix/install-nix-action@v22
-        with:
-          extra_nix_config: |
-            sandbox = true
       - name: Apply
         run: |
-          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN prod" ./shell.nix
+          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN prod"
         env:
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}

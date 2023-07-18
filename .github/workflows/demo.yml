@@ -7,11 +7,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
-        with:
-          extra_nix_config: |
-            sandbox = true
+      - if: runner.os == 'macOS'
+        run: |
+          brew install bash
+          sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+          chsh -s /usr/local/bin/bash
       - name: Apply
         run: |
-          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN dev" ./shell.nix
+          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN dev"
         env:
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
