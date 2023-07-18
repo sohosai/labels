@@ -7,8 +7,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
+        with: |
+          sandbox = true
       - name: Apply
         run: |
-          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN dev"
+          nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN dev" ./shell.nix
         env:
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
