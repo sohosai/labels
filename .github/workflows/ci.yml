@@ -12,21 +12,26 @@ jobs:
       - uses: cachix/install-nix-action@v22
       - run: nix-env -f ./nix/pkgs.nix -iA shellcheck
       - run: shellcheck -x -s bash ./src/main.sh
-  sync-dry-run:
-    strategy:
-      matrix:
-        os: [ubuntu-22.04, macos-12]
-    runs-on: ${{ matrix.os }}
+  sync-dry-run-macos:
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
-      - if: runner.os == 'macOS'
-        run: |
+      - run: |
           brew install bash
           sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
       - uses: cachix/install-nix-action@v22
       - run: |
           nix-shell --pure --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
         shell: /usr/local/bin/bash -l {0}
+        env: 
+          GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
+  sync-dry-run-ubuntu:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v22
+      - run: |
+          nix-shell --pure --command "bash ./src/main.sh $GITHUB_TOKEN dry-run"
         env: 
           GITHUB_TOKEN: ${{ secrets.SOHOSAI_LABELS_TOKEN }}
   nixpkgs-fmt:
