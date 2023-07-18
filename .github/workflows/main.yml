@@ -9,13 +9,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - if: runner.os == 'macOS'
-        run: |
-          brew install bash
-          sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
       - uses: cachix/install-nix-action@v22
       - name: Apply
-        shell: /usr/local/bin/bash -l {0}
         run: |
           nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN prod"
         env:
