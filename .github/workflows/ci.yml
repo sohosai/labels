@@ -20,8 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
-        with: |
-          sandbox = true
+        with:
+          extra_nix_config: |
+            sandbox = true
       - run: |
           nix-shell --pure --command "bash ./src/main.sh $GITHUB_TOKEN dry-run" ./shell.nix
         env: 
