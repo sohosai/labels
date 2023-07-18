@@ -13,9 +13,9 @@ jobs:
         run: |
           brew install bash
           sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-          chsh -s /usr/local/bin/bash
       - uses: cachix/install-nix-action@v22
       - name: Apply
+        shell: /usr/local/bin/bash -l {0}
         run: |
           nix-shell --pure --command "bash src/main.sh $GITHUB_TOKEN prod"
         env:
