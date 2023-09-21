@@ -16,7 +16,10 @@ let mailLabels =
       , DefinedLabelKind.mail
       ]
 
-let developmentLabels =
-      [ DefinedLabelKind.development ]
+let developmentLabels = [ DefinedLabelKind.development ]
 
-in  { info-mail = mailLabels, project49th-mail = mailLabels, web23 = developmentLabels } : Repository
+in    { info-mail = mailLabels
+      , project49th-mail = mailLabels
+      , web23 = developmentLabels
+      }
+    : Repository
