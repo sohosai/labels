@@ -19,7 +19,8 @@ let convertLabels =
         List/map Label ConvertedLabel convertLabel labels
 
 let DefinedLabelKind =
-      < mail-dan
+      < development
+      | mail-dan
       | mail-honki
       | mail-jsys
       | mail-kosen
@@ -35,7 +36,8 @@ let DefinedLabelKind =
 let definedLabelKindToText =
       \(label : DefinedLabelKind) ->
         merge
-          { mail-dan = "mail-dan"
+          { development = "development"
+          , mail-dan = "mail-dan"
           , mail-honki = "mail-honki"
           , mail-jsys = "mail-jsys"
           , mail-kosen = "mail-kosen"
