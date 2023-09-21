@@ -1,6 +1,6 @@
 let LabelDhall = ./models/label.dhall
 
-let Label = LabelDhall.Label
+let Label = LabelDhall.Type
 
 let convertLabels = LabelDhall.convertLabels
 
