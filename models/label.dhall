@@ -7,12 +7,16 @@ let Color = ColorDhall.Type
 
 let colorToText = ColorDhall.colorToText
 
-let Label = { name : Text, color : Color }
+let Label = { name : Text, description : Text, color : Color }
 
-let ConvertedLabel = { name : Text, color : Text }
+let ConvertedLabel = { name : Text, description : Text, color : Text }
 
 let convertLabel =
-      \(label : Label) -> { name = label.name, color = colorToText label.color }
+      \(label : Label) ->
+        { name = label.name
+        , description = label.description
+        , color = colorToText label.color
+        }
 
 let convertLabels =
       \(labels : List Label) ->
