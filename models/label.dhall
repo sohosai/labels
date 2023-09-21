@@ -7,19 +7,24 @@ let Color = ColorDhall.Type
 
 let colorToText = ColorDhall.colorToText
 
-let Label = { name : Text, color : Color }
+let Label = { name : Text, description : Text, color : Color }
 
-let ConvertedLabel = { name : Text, color : Text }
+let ConvertedLabel = { name : Text, description : Text, color : Text }
 
 let convertLabel =
-      \(label : Label) -> { name = label.name, color = colorToText label.color }
+      \(label : Label) ->
+        { name = label.name
+        , description = label.description
+        , color = colorToText label.color
+        }
 
 let convertLabels =
       \(labels : List Label) ->
         List/map Label ConvertedLabel convertLabel labels
 
 let DefinedLabelKind =
-      < mail-dan
+      < development
+      | mail-dan
       | mail-honki
       | mail-jsys
       | mail-kosen
@@ -35,7 +40,8 @@ let DefinedLabelKind =
 let definedLabelKindToText =
       \(label : DefinedLabelKind) ->
         merge
-          { mail-dan = "mail-dan"
+          { development = "development"
+          , mail-dan = "mail-dan"
           , mail-honki = "mail-honki"
           , mail-jsys = "mail-jsys"
           , mail-kosen = "mail-kosen"
