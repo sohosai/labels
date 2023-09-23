@@ -35,6 +35,7 @@ let DefinedLabelKind =
       | mail-stage
       | mail-zai
       | mail
+      | roundcube-plugins
       >
 
 let definedLabelKindToText =
@@ -52,6 +53,7 @@ let definedLabelKindToText =
           , mail-stage = "mail-stage"
           , mail-zai = "mail-zai"
           , mail = "mail"
+          , roundcube-plugins = "roundcube-plugins"
           }
           label
 

@@ -18,8 +18,12 @@ let mailLabels =
 
 let developmentLabels = [ DefinedLabelKind.development ]
 
+let roundcubePluginsLabels =
+      [ DefinedLabelKind.development, DefinedLabelKind.roundcube-plugins ]
+
 in    { info-mail = mailLabels
       , project49th-mail = mailLabels
       , web23 = developmentLabels
+      , roundcube-akairer = roundcubePluginsLabels
       }
     : Repository
