@@ -7,6 +7,7 @@ let Repository =
       , project49th-mail : List DefinedLabelKind
       , web23 : List DefinedLabelKind
       , roundcube-akairer : List DefinedLabelKind
+      , imp2forward : List DefinedLabelKind
       }
 
 in  Repository
