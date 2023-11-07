@@ -23,7 +23,7 @@ let roundcubePluginsLabels =
 
 in    { info-mail = mailLabels
       , project49th-mail = mailLabels
-      , web23 = developmentLabels
+      , web23-frontend = developmentLabels
       , roundcube-akairer = roundcubePluginsLabels
       , imp2forward = developmentLabels
       , web24-frontend= developmentLabels
