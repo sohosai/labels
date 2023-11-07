@@ -9,6 +9,7 @@ let Repository =
       , roundcube-akairer : List DefinedLabelKind
       , imp2forward : List DefinedLabelKind
       , web24-frontend : List DefinedLabelKind
+      , teaser23 : List DefinedLabelKind
       }
 
 in  Repository
