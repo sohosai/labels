@@ -26,6 +26,5 @@ in    { info-mail = mailLabels
       , web23 = developmentLabels
       , roundcube-akairer = roundcubePluginsLabels
       , imp2forward = developmentLabels
-      , web24-frontend= developmentLabels
       }
     : Repository
